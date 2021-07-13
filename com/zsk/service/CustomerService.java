@@ -191,18 +191,22 @@ public class CustomerService {
     }
 
     //存款
-    private void doSaveMoney(){
+    private void doSaveMoney() {
         //提示界面
         System.out.println("你想存的金额：");
         //接收钱
-        Scanner scanner =new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String moneyIn = scanner.nextLine();
         Double moneyInInt = Double.valueOf(moneyIn);
-        double newMoney = currentCustomer.getMoney()+moneyInInt;
-        currentCustomer.setMoney(newMoney);
-        System.out.println("你的账号余额是：" + newMoney);
-    }
+        if ((moneyInInt % 100) == 0) {
+            double newMoney = currentCustomer.getMoney() + moneyInInt;
+            currentCustomer.setMoney(newMoney);
+            System.out.println("你的账号余额是：" + newMoney);
+        }else {
+            System.out.println("存入的金额不能小于100，存入金额失败");
+        }
 
+    }
 
     private  void goOneHome( ){
         TextUitl.oneLeveOption();
