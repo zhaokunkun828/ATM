@@ -145,16 +145,22 @@ public class CustomerService {
             System.out.println("你的余额是:" + money);
             //取完款后，更新原有存款
             currentCustomer.setMoney(money);
-        }else if(numIn.equals("8")){
-            Scanner sc = new Scanner(System.in);
-            System.out.println("请输入您的取款金额：");
-            int money = sc.nextInt();
-            if (money>0&&money<=currentCustomer.getMoney()){
-                currentCustomer.setMoney(currentCustomer.getMoney()-money);
-                System.out.println("取款成功");
-                System.out.println("你的当前余额为："+currentCustomer.getMoney());
-            }else {
-                System.out.println("输入错误");
+        }else if (numIn.equals("8")) {
+            // 那么 取款100 那么就应该 让 顾客的 钱 -100
+            System.out.println("请输入要取的金额");
+            double money = scanner.nextDouble();
+            if (money <= currentCustomer.getMoney()) {
+
+                if ((money % 100) == 0) {
+                    money = currentCustomer.getMoney() - money;
+                    currentCustomer.setMoney(money);
+                    System.out.println("取款成功！ 您的余额是: " + currentCustomer.getMoney());
+
+                } else {
+                    System.out.println("取款失败 ， 请输入100或100的倍数");
+                }
+            }else{
+                System.out.println("余额不足。");
             }
         }
     }
